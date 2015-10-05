@@ -1,0 +1,61 @@
+h1, h2, h3, h4, .highlight {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h4, .highlight {
+  color: #A32500;
+}
+
+ul, .data {
+  font-family: Helvetica, Arial, sans-serif;
+  color: black;
+}
+
+p {
+  font-family: Times, Georgia, serif;
+  color: #2B2922;
+}
+
+body {
+  background-color: #FFF3CA;
+}
+
+div {
+  height: 150px;
+  width: 150px;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+#c1 {
+  background-color: #BAB293;
+}
+
+#c2 {
+  background-color: #A39770;
+}
+
+#c3 {
+  background-color: #FFF3CA;
+}
+
+#c4 {
+  background-color: #A32500;
+  color: white;
+}
+
+#c5 {
+  background-color: #2B2922;
+  color: white;
+}
+
+.caption {
+  color: #2B2922;
+  font-style: italic;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
