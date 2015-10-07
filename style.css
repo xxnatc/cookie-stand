@@ -57,8 +57,8 @@ h4, .highlight {
   color: #DC7A23;
 }
 
-ul, .data {
-  font-family: Helvetica, Arial, sans-serif;
+ul, ol, .data {
+  font-family: Arial, sans-serif;
   color: black;
 }
 
@@ -67,10 +67,18 @@ p {
   color: #003446;
 }
 
+a {
+  font-family: 'Montserrat';
+  color: #003446;
+}
+
 .caption {
   color: #2B2922;
   font-style: italic;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
+}
+
+h1 + p.caption, h2 + p.caption, h3 + p.caption, h4 + p.caption {
   margin-top: -12px;
 }
