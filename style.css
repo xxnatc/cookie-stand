@@ -93,6 +93,15 @@ h1 + p.caption, h2 + p.caption, h3 + p.caption, h4 + p.caption {
   margin-top: -12px;
 }
 
+table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+th, td {
+  padding: 6px;
+}
 
 /* public page */
 div#wrapper {
