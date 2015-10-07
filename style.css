@@ -1,4 +1,8 @@
-body {
+body.public {
+  background-color: #2B2922;
+}
+
+body.private {
   background-color: #F6EDD2;
 }
 
@@ -29,7 +33,7 @@ body {
   color: #FFFFFF;
 }
 
-div {
+div.palette {
   height: 120px;
   width: 120px;
   display: inline-block;
@@ -45,11 +49,11 @@ h1, h2, h3, h4, h5, h6, .highlight {
   font-family: 'Montserrat', sans-serif;
 }
 
-h2 {
+h3 {
   color: #003446;
 }
 
-h3 {
+h2 {
   color: #A72500;
 }
 
@@ -64,12 +68,18 @@ ul, ol, .data {
 
 p {
   font-family: Times, Georgia, serif;
-  color: #003446;
+  color: #000000;
 }
 
 a {
   font-family: 'Montserrat';
   color: #003446;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #DC7A23;
 }
 
 .caption {
@@ -81,4 +91,71 @@ a {
 
 h1 + p.caption, h2 + p.caption, h3 + p.caption, h4 + p.caption {
   margin-top: -12px;
+}
+
+
+/* public page */
+div#wrapper {
+  max-width: 960px;
+  min-width: 720px;
+  background-color: #DC7A23;
+  margin: 20px auto 20px auto;
+  display: block;
+}
+
+header {
+  background-color: #F6EDD2;
+  padding: 6px 24px;
+
+}
+
+section {
+  padding: 6px 24px 0px 24px;
+}
+
+ul#locations-list li p, ul#locations-list li {
+  margin-top: -12px;
+  font-size: 0.92em;
+  font-family: 'Montserrat', sans-serif;
+  color: #000;
+}
+
+div#main-content {
+  width: 70%;
+  float: left;
+  background-color: white;
+}
+
+div#sidebar {
+  width: 30%;
+  float: right;
+  background-color: #DC7A23;
+  color: white;
+}
+
+div#sidebar h4 {
+  color: #F6EDD2;
+}
+
+td {
+  padding-right: 16px;
+  vertical-align: middle;
+}
+
+td h1, td h3 {
+  margin-bottom: -12px;
+}
+
+section#events img {
+  margin-left: 12px;
+  float: right;
+}
+
+footer {
+  clear: both;
+  padding: 6px;
+  background-color: #F6EDD2;
+  font-size: 80%;
+  text-align: center;
+  font-family: 'Montserrat';
 }
