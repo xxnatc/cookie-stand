@@ -13,27 +13,26 @@ for (var i = openingHour; i < closingHour; i++){
   }
 }
 
-writeTime = (function(){
-    var table = document.getElementById('summary');
-    var row = document.createElement('tr');
+// this IIFE creates the table header and populate with appropriate times
+(function(){
+  var table = document.getElementById('summary');
+  var row = document.createElement('tr');
+  // append an empty TextNode
+  var start = document.createElement('th');
+  start.appendChild(document.createTextNode(''));
+  row.appendChild(start);
 
-    var start = document.createElement('th');
-    start.appendChild(document.createTextNode(''));
-    row.appendChild(start);
-    
-    for (var i = 0; i < hourText.length; i++){
-      var time = document.createElement('th');
-      time.appendChild(document.createTextNode(hourText[i]));
-      row.appendChild(time);
-    }
+  for (var i = 0; i < hourText.length; i++){
+    var time = document.createElement('th');
+    time.appendChild(document.createTextNode(hourText[i]));
+    row.appendChild(time);
+  }
+  var end = document.createElement('th');
+  end.appendChild(document.createTextNode('Total (cookies)'));
+  row.appendChild(end);
 
-    var end = document.createElement('th');
-    end.appendChild(document.createTextNode('Total'));
-    row.appendChild(end);
-    
-    table.appendChild(row);
-  }());
-
+  table.appendChild(row);
+})();
 
 // creating object constructor for CookieStand
 var CookieStand = function(place, min, max, avg) {
@@ -58,7 +57,7 @@ var CookieStand = function(place, min, max, avg) {
       total += sale;
     }
     return total;
-  }
+  };
   this.dayTotal = this.sim();
 
   // write store location using specified id
@@ -86,6 +85,7 @@ var CookieStand = function(place, min, max, avg) {
     this.writeUL(id2);
   };
 
+  // write store location and simulation results to table
   this.writeTable = function(){
     var table = document.getElementById('summary');
     var row = document.createElement('tr');
@@ -93,7 +93,6 @@ var CookieStand = function(place, min, max, avg) {
     var loc = document.createElement('th');
     loc.appendChild(document.createTextNode(this.place));
     row.appendChild(loc);
-
     for (var i = 0; i < this.hourTotal.length; i++){
       var data = document.createElement('td');
       data.appendChild(document.createTextNode(this.hourTotal[i]));
@@ -105,9 +104,8 @@ var CookieStand = function(place, min, max, avg) {
 
     table.appendChild(row);
   };
-
+  // immediate invoke writeTable() to present results
   this.writeTable();
-
 };
 
 // create object for each store location
@@ -116,4 +114,3 @@ var seatac = new CookieStand('SeaTac Airport', 6, 44, 1.2);
 var scenter = new CookieStand('Southcenter Mall', 11, 38, 1.9);
 var bellevue = new CookieStand('Bellevue Square', 20, 48, 3.3);
 var alki = new CookieStand('Alki', 3, 24, 2.6);
- 
