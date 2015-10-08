@@ -13,9 +13,11 @@ for (var i = openingHour; i < closingHour; i++){
   }
 }
 
+var table = document.getElementById('summary');
+
 // this IIFE creates the table header and populate with appropriate times
 (function(){
-  var table = document.getElementById('summary');
+  // var table = document.getElementById('summary');
   var row = document.createElement('tr');
   // append an empty TextNode
   var start = document.createElement('th');
@@ -60,34 +62,8 @@ var CookieStand = function(place, min, max, avg) {
   };
   this.dayTotal = this.sim();
 
-  // write store location using specified id
-  this.writeLocation = function(id){
-    var el = document.getElementById(id);
-    el.innerHTML = this.place;
-  };
-
-  // write simulated hourly sales and daily total as list using specified id
-  this.writeUL = function(id){
-    var list = document.getElementById(id);
-    for (var i = 0; i < this.hourTotal.length; i++){
-      var item = document.createElement('li');
-      item.appendChild(document.createTextNode(hourText[i] + ': ' + this.hourTotal[i] + ' cookies'));
-      list.appendChild(item);
-    }
-    var item = document.createElement('li');
-    item.appendChild(document.createTextNode('Total: ' + this.dayTotal + ' cookies'));
-    list.appendChild(item); 
-  };
-
-  // combine writeLocation() and writeUL() - writing store location, hourly sales and daily total at once
-  this.writeOnPage = function(id1, id2){
-    this.writeLocation(id1);
-    this.writeUL(id2);
-  };
-
   // write store location and simulation results to table
   this.writeTable = function(){
-    var table = document.getElementById('summary');
     var row = document.createElement('tr');
 
     var loc = document.createElement('th');
@@ -101,11 +77,8 @@ var CookieStand = function(place, min, max, avg) {
     var sum = document.createElement('td');
     sum.appendChild(document.createTextNode(this.dayTotal));
     row.appendChild(sum);
-
-    table.appendChild(row);
+    return row;
   };
-  // immediate invoke writeTable() to present results
-  this.writeTable();
 };
 
 // create object for each store location
@@ -114,3 +87,48 @@ var seatac = new CookieStand('SeaTac Airport', 6, 44, 1.2);
 var scenter = new CookieStand('Southcenter Mall', 11, 38, 1.9);
 var bellevue = new CookieStand('Bellevue Square', 20, 48, 3.3);
 var alki = new CookieStand('Alki', 3, 24, 2.6);
+
+var allStores = [pike, seatac, scenter, bellevue, alki];
+
+var renderAll = function() {
+  // clear table data
+  while (table.childNodes.length > 1) {   
+    table.removeChild(table.lastChild);
+  }
+
+  for (var i = 0; i < allStores.length; i++) {
+    table.appendChild(allStores[i].writeTable());
+  }
+}
+
+renderAll();
+
+// retrieve input from form
+var addStore = document.getElementById('add-store');
+var newSubmit = document.getElementById('submit-button');
+
+var newPlace = document.getElementById('new-place');
+var newMin = document.getElementById('new-min');
+var newMax = document.getElementById('new-max');
+var newAvg = document.getElementById('new-avg');
+
+var handleSubmit = function(event) {
+  event.preventDefault();
+  // alert user if any field is empty
+  if (!newPlace.value || !newMin.value || !newMax.value || !newAvg.value) {
+    return alert('Please fill in every field.');
+  }
+
+  var newStore = new CookieStand(newPlace.value, Number(newMin.value), Number(newMax.value), Number(newAvg.value)); 
+  allStores.push(newStore);
+
+  // reset input values
+  newPlace.value = null;
+  newMin.value = null;
+  newMax.value = null;
+  newAvg.value = null;
+
+  renderAll();
+};
+
+newSubmit.addEventListener('click', handleSubmit);

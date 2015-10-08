@@ -115,6 +115,11 @@ th, td {
   padding: 6px;
 }
 
+form {
+  margin-top: 24px;
+  width: 300px;
+}
+
 /* hyperlink behaviors */
 a {
   font-family: 'Montserrat';
