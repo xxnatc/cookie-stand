@@ -13,6 +13,27 @@ for (var i = openingHour; i < closingHour; i++){
   }
 }
 
+// this IIFE creates the table header and populate with appropriate times
+(function(){
+  var table = document.getElementById('summary');
+  var row = document.createElement('tr');
+  // append an empty TextNode
+  var start = document.createElement('th');
+  start.appendChild(document.createTextNode(''));
+  row.appendChild(start);
+
+  for (var i = 0; i < hourText.length; i++){
+    var time = document.createElement('th');
+    time.appendChild(document.createTextNode(hourText[i]));
+    row.appendChild(time);
+  }
+  var end = document.createElement('th');
+  end.appendChild(document.createTextNode('Total (cookies)'));
+  row.appendChild(end);
+
+  table.appendChild(row);
+})();
+
 // creating object constructor for CookieStand
 var CookieStand = function(place, min, max, avg) {
   this.place = place;
@@ -36,7 +57,7 @@ var CookieStand = function(place, min, max, avg) {
       total += sale;
     }
     return total;
-  }
+  };
   this.dayTotal = this.sim();
 
   // write store location using specified id
@@ -63,6 +84,28 @@ var CookieStand = function(place, min, max, avg) {
     this.writeLocation(id1);
     this.writeUL(id2);
   };
+
+  // write store location and simulation results to table
+  this.writeTable = function(){
+    var table = document.getElementById('summary');
+    var row = document.createElement('tr');
+
+    var loc = document.createElement('th');
+    loc.appendChild(document.createTextNode(this.place));
+    row.appendChild(loc);
+    for (var i = 0; i < this.hourTotal.length; i++){
+      var data = document.createElement('td');
+      data.appendChild(document.createTextNode(this.hourTotal[i]));
+      row.appendChild(data);
+    }
+    var sum = document.createElement('td');
+    sum.appendChild(document.createTextNode(this.dayTotal));
+    row.appendChild(sum);
+
+    table.appendChild(row);
+  };
+  // immediate invoke writeTable() to present results
+  this.writeTable();
 };
 
 // create object for each store location
@@ -71,11 +114,3 @@ var seatac = new CookieStand('SeaTac Airport', 6, 44, 1.2);
 var scenter = new CookieStand('Southcenter Mall', 11, 38, 1.9);
 var bellevue = new CookieStand('Bellevue Square', 20, 48, 3.3);
 var alki = new CookieStand('Alki', 3, 24, 2.6);
- 
-
-// display simulation results in browser
-pike.writeOnPage('pike-head', 'pike');
-seatac.writeOnPage('seatac-head', 'seatac');
-scenter.writeOnPage('scenter-head', 'scenter');
-bellevue.writeOnPage('bellevue-head', 'bellevue');
-alki.writeOnPage('alki-head', 'alki');
