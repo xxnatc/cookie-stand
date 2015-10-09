@@ -116,8 +116,13 @@ th, td {
 }
 
 form {
-  margin-top: 24px;
+  margin-top: 12px;
   width: 300px;
+}
+
+#update-msg {
+  color: #DC7A23;
+  font-weight: bold;
 }
 
 /* hyperlink behaviors */

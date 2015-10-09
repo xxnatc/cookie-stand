@@ -3,25 +3,27 @@
   <title>Salmon Cookies Sale Simulation</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-
 </head>
 
 <body class="private">
   <h1>Salmon Cookies Sales Simulation</h1>
+
   <table id="summary"></table>
+  
+  <p id="update-msg"></p>
 
   <form id="add-store">
     <fieldset>
-      <legend> New Location </legend>
+      <legend><b>Add/Update Location</b></legend>
 
-      Store Location:<br />
+      Store location:<br />
       <input type="text" id="new-place"><br />
-      Minimum Customers Per Hour:<br />
-      <input type="text" id="new-min"><br />
-      Maximum Customers Per Hour:<br />
-      <input type="text" id="new-max"><br />
-      Average Cookies Per Customer:<br />
-      <input type="text" id="new-avg"><br />
+      Minimum customers per hour:<br />
+      <input type="text" id="new-min" size="5"><br />
+      Maximum customers per hour:<br />
+      <input type="text" id="new-max" size="5"><br />
+      Average cookies per customer:<br />
+      <input type="text" id="new-avg" size="5"><br />
 
       <button id="submit-button" type="click">Submit</button>
     </fieldset>

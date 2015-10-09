@@ -1,3 +1,5 @@
+var table = document.getElementById('summary');
+
 var openingHour = 10;
 var closingHour = 18;
 
@@ -12,8 +14,6 @@ for (var i = openingHour; i < closingHour; i++){
     hourText.push((i - 12) + 'pm');
   }
 }
-
-var table = document.getElementById('summary');
 
 // this IIFE creates the table header and populate with appropriate times
 (function(){
@@ -90,8 +90,8 @@ var alki = new CookieStand('Alki', 3, 24, 2.6);
 
 var allStores = [pike, seatac, scenter, bellevue, alki];
 
+// clear and rewrite results in table
 var renderAll = function() {
-  // clear table data
   while (table.childNodes.length > 1) {   
     table.removeChild(table.lastChild);
   }
@@ -106,21 +106,47 @@ renderAll();
 // retrieve input from form
 var addStore = document.getElementById('add-store');
 var newSubmit = document.getElementById('submit-button');
+var msg = document.getElementById('update-msg');
 
-var newPlace = document.getElementById('new-place');
-var newMin = document.getElementById('new-min');
-var newMax = document.getElementById('new-max');
-var newAvg = document.getElementById('new-avg');
+var newPlace, newMin, newMax, newAvg;
+var retrieveInput = function() {
+  newPlace = document.getElementById('new-place');
+  newMin = document.getElementById('new-min');
+  newMax = document.getElementById('new-max');
+  newAvg = document.getElementById('new-avg');
+};
 
 var handleSubmit = function(event) {
   event.preventDefault();
-  // alert user if any field is empty
+  retrieveInput();
+
+  // checking input, alert user if any field is invalid
   if (!newPlace.value || !newMin.value || !newMax.value || !newAvg.value) {
     return alert('Please fill in every field.');
   }
+  if (isNaN(newMin.value) || isNaN(newMax.value) || isNaN(newAvg.value)) {
+    return alert('Make sure you entered numbers for "Minimum customers per hour", "Maximum customers per hour", and "Average customers per hour".');
+  }
+  if (Number(newMin.value) > Number(newMax.value)) {
+    return alert('Value entered for "Maximum customers per hour" must be greater than that for "Minimum customers per hour".')
+  }
 
   var newStore = new CookieStand(newPlace.value, Number(newMin.value), Number(newMax.value), Number(newAvg.value)); 
-  allStores.push(newStore);
+
+  // check if location already exists
+  var storeIndex = -1;
+  for (var i = 0; i < allStores.length; i++) {
+    if (allStores[i].place.toLowerCase() === newPlace.value.toLowerCase()) {
+      storeIndex = i;
+    }
+  }
+  if (storeIndex < 0) {
+    allStores.push(newStore);
+    msg.innerHTML = 'New store location added.'
+  } else {
+    allStores[storeIndex] = newStore;
+    msg.innerHTML = 'Store location updated.'
+  }
 
   // reset input values
   newPlace.value = null;
