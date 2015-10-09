@@ -111,18 +111,57 @@ table#summary, table#summary th, table#summary td {
   font-family: Arial, sans-serif;
 }
 
-th, td {
-  padding: 6px;
+table#summary tr:hover {
+  background-color: white;
 }
 
-form {
-  margin-top: 12px;
-  width: 300px;
+th, td {
+  padding: 6px;
 }
 
 #update-msg {
   color: #DC7A23;
   font-weight: bold;
+}
+
+form {
+  margin-top: 12px;
+  width: 300px;
+  font-family: Arial;
+}
+
+fieldset {
+  border: 2px solid #003446;
+  padding-left: 18px;
+}
+
+legend {
+  margin-left: -8px;
+  padding: 2px 8px 2px 8px;
+  color: #003446;
+}
+
+input {
+  background-color: white;
+  margin-bottom: 6px;
+}
+
+#submit-button {
+  background-color: #003446;
+  color: white;
+  padding: 5px;
+  margin-top: 5px;
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+#submit-button:hover {
+  background-color: #004961; 
+}
+
+#submit-button:active {
+  background-color: #005C7A;
 }
 
 /* hyperlink behaviors */
