@@ -1,3 +1,5 @@
+var table = document.getElementById('summary');
+
 var openingHour = 10;
 var closingHour = 18;
 
@@ -15,7 +17,7 @@ for (var i = openingHour; i < closingHour; i++){
 
 // this IIFE creates the table header and populate with appropriate times
 (function(){
-  var table = document.getElementById('summary');
+  // var table = document.getElementById('summary');
   var row = document.createElement('tr');
   // append an empty TextNode
   var start = document.createElement('th');
@@ -60,34 +62,8 @@ var CookieStand = function(place, min, max, avg) {
   };
   this.dayTotal = this.sim();
 
-  // write store location using specified id
-  this.writeLocation = function(id){
-    var el = document.getElementById(id);
-    el.innerHTML = this.place;
-  };
-
-  // write simulated hourly sales and daily total as list using specified id
-  this.writeUL = function(id){
-    var list = document.getElementById(id);
-    for (var i = 0; i < this.hourTotal.length; i++){
-      var item = document.createElement('li');
-      item.appendChild(document.createTextNode(hourText[i] + ': ' + this.hourTotal[i] + ' cookies'));
-      list.appendChild(item);
-    }
-    var item = document.createElement('li');
-    item.appendChild(document.createTextNode('Total: ' + this.dayTotal + ' cookies'));
-    list.appendChild(item); 
-  };
-
-  // combine writeLocation() and writeUL() - writing store location, hourly sales and daily total at once
-  this.writeOnPage = function(id1, id2){
-    this.writeLocation(id1);
-    this.writeUL(id2);
-  };
-
   // write store location and simulation results to table
   this.writeTable = function(){
-    var table = document.getElementById('summary');
     var row = document.createElement('tr');
 
     var loc = document.createElement('th');
@@ -101,11 +77,8 @@ var CookieStand = function(place, min, max, avg) {
     var sum = document.createElement('td');
     sum.appendChild(document.createTextNode(this.dayTotal));
     row.appendChild(sum);
-
-    table.appendChild(row);
+    return row;
   };
-  // immediate invoke writeTable() to present results
-  this.writeTable();
 };
 
 // create object for each store location
@@ -114,3 +87,74 @@ var seatac = new CookieStand('SeaTac Airport', 6, 44, 1.2);
 var scenter = new CookieStand('Southcenter Mall', 11, 38, 1.9);
 var bellevue = new CookieStand('Bellevue Square', 20, 48, 3.3);
 var alki = new CookieStand('Alki', 3, 24, 2.6);
+
+var allStores = [pike, seatac, scenter, bellevue, alki];
+
+// clear and rewrite results in table
+var renderAll = function() {
+  while (table.childNodes.length > 1) {   
+    table.removeChild(table.lastChild);
+  }
+
+  for (var i = 0; i < allStores.length; i++) {
+    table.appendChild(allStores[i].writeTable());
+  }
+}
+
+renderAll();
+
+// retrieve input from form
+var addStore = document.getElementById('add-store');
+var newSubmit = document.getElementById('submit-button');
+var msg = document.getElementById('update-msg');
+
+var newPlace, newMin, newMax, newAvg;
+var retrieveInput = function() {
+  newPlace = document.getElementById('new-place');
+  newMin = document.getElementById('new-min');
+  newMax = document.getElementById('new-max');
+  newAvg = document.getElementById('new-avg');
+};
+
+var handleSubmit = function(event) {
+  event.preventDefault();
+  retrieveInput();
+
+  // checking input, alert user if any field is invalid
+  if (!newPlace.value || !newMin.value || !newMax.value || !newAvg.value) {
+    return alert('Please fill in every field.');
+  }
+  if (isNaN(newMin.value) || isNaN(newMax.value) || isNaN(newAvg.value)) {
+    return alert('Make sure you entered numbers for "Minimum customers per hour", "Maximum customers per hour", and "Average customers per hour".');
+  }
+  if (Number(newMin.value) > Number(newMax.value)) {
+    return alert('Value entered for "Maximum customers per hour" must be greater than that for "Minimum customers per hour".')
+  }
+
+  var newStore = new CookieStand(newPlace.value, Number(newMin.value), Number(newMax.value), Number(newAvg.value)); 
+
+  // check if location already exists
+  var storeIndex = -1;
+  for (var i = 0; i < allStores.length; i++) {
+    if (allStores[i].place.toLowerCase() === newPlace.value.toLowerCase()) {
+      storeIndex = i;
+    }
+  }
+  if (storeIndex < 0) {
+    allStores.push(newStore);
+    msg.innerHTML = 'New store location added.'
+  } else {
+    allStores[storeIndex] = newStore;
+    msg.innerHTML = 'Store location updated.'
+  }
+
+  // reset input values
+  newPlace.value = null;
+  newMin.value = null;
+  newMax.value = null;
+  newAvg.value = null;
+
+  renderAll();
+};
+
+newSubmit.addEventListener('click', handleSubmit);
