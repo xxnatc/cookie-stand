@@ -1,33 +1,42 @@
 <html>
 <head>
-  <title>Salmon Cookies Sale Simulation</title>
+  <title>Salmon Cookies Sales Simulation</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 
 <body class="private">
-  <h1>Salmon Cookies Sales Simulation</h1>
+  <section class="content">
+    <table class="heading">
+      <tr>
+        <td><img src="img/logo-brown.png" width="100"/></td>
+        <td>
+          <h1>Salmon Cookies Sales Simulation</h1>
+        </td>
+      </tr>
+    </table>
 
-  <table id="summary"></table>
-  
-  <p id="update-msg"></p>
+    <table id="summary"></table>
+    
+    <p id="update-msg"></p>
 
-  <form id="add-store">
-    <fieldset>
-      <legend><b>Add/Update Location</b></legend>
+    <form id="add-store">
+      <fieldset>
+        <legend><b>Add/Update Location</b></legend>
 
-      Store location:<br />
-      <input type="text" id="new-place" size="25"><br />
-      Minimum customers per hour:<br />
-      <input type="text" id="new-min" size="7"><br />
-      Maximum customers per hour:<br />
-      <input type="text" id="new-max" size="7"><br />
-      Average cookies per customer:<br />
-      <input type="text" id="new-avg" size="7"><br />
+        Store location:<br />
+        <input type="text" id="new-place" size="25"><br />
+        Minimum customers per hour:<br />
+        <input type="text" id="new-min" size="7"><br />
+        Maximum customers per hour:<br />
+        <input type="text" id="new-max" size="7"><br />
+        Average cookies per customer:<br />
+        <input type="text" id="new-avg" size="7"><br />
 
-      <button id="submit-button" type="click">Submit</button>
-    </fieldset>
-  </form>
+        <button id="submit-button" type="click">Submit</button>
+      </fieldset>
+    </form>
+  </section>
 
   <script src="app.js"></script>
 </body>

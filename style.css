@@ -1,4 +1,6 @@
+/* -------- body background -------- */
 body.public {
+  background-image: url("img/bg-pattern.png");
   background-color: #2B2922;
 }
 
@@ -6,7 +8,43 @@ body.private {
   background-color: #F6EDD2;
 }
 
-/* style guide; color palette */
+section.content {
+  width: 740px;
+  margin: 12px auto;
+  padding: 12px;
+}
+
+/* -------- style guide -------- */
+h3 + table.logo-demo {
+  margin-top: -28px;
+}
+
+table.logo-demo td{
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+#logo-demo-light {
+  background-color: white;
+}
+
+#logo-demo-dark {
+  background-color: #222;
+}
+
+.caption {
+  color: #2B2922;
+  font-style: italic;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+h1 + p.caption, h2 + p.caption, h3 + p.caption, h4 + p.caption {
+  margin-top: -12px;
+}
+
+/* -------- color palette -------- */
 #c1 {
   background-color: #2B2922;
   color: #FFFFFF;
@@ -44,31 +82,15 @@ div.palette {
   display: table-cell;
 }
 
-h3 + table.logo-demo {
-  margin-top: -28px;
-}
-
-table.logo-demo td{
-  padding: 8px 12px;
-  text-align: left;
-  vertical-align: bottom;
-}
-
-#logo-demo-light {
-  background-color: white;
-}
-
-#logo-demo-dark {
-  background-color: #222;
-}
-
-/* text */
+/* -------- general text -------- */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
   color: #2B2922;
+  font-size: 200%;
+  margin-top: 0px;
 }
 
 h2 {
@@ -93,18 +115,19 @@ p {
   color: black;
 }
 
-.caption {
-  color: #2B2922;
-  font-style: italic;
-  font-family: Arial, sans-serif;
-  font-size: 12px;
+/* -------- hyperlink behaviors -------- */
+a {
+  font-family: 'Montserrat';
+  color: #003446;
+  text-decoration: none;
 }
 
-h1 + p.caption, h2 + p.caption, h3 + p.caption, h4 + p.caption {
-  margin-top: -12px;
+a:hover {
+  color: #DC7A23;
+  text-decoration: underline;
 }
 
-/* sales simulation */
+/* -------- sales simulation -------- */
 table#summary, table#summary th, table#summary td {
   border: 1px solid;
   border-collapse: collapse;
@@ -115,8 +138,16 @@ table#summary tr:hover {
   background-color: white;
 }
 
+table#summary th {
+  background-color: #E8D087;
+}
+
 th, td {
   padding: 6px;
+}
+
+table.heading td {
+  vertical-align: bottom;
 }
 
 #update-msg {
@@ -124,6 +155,7 @@ th, td {
   font-weight: bold;
 }
 
+/* -------- input form -------- */
 form {
   margin-top: 12px;
   width: 300px;
@@ -164,19 +196,7 @@ input {
   background-color: #005C7A;
 }
 
-/* hyperlink behaviors */
-a {
-  font-family: 'Montserrat';
-  color: #003446;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #DC7A23;
-  text-decoration: underline;
-}
-
-/* public page */
+/* -------- public page -------- */
 div#wrapper {
   max-width: 960px;
   min-width: 720px;
@@ -241,7 +261,9 @@ div#sidebar h4 {
 }
 
 div#sidebar ul {
-  margin-left: -12px;
+  margin-left: -7px;
+  list-style-image: url("img/fish-bullet.png");
+
 }
 
 ul#locations-list li p, ul#locations-list li {
